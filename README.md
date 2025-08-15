@@ -1,7 +1,7 @@
 To open/access the website in your system
-open VS code
-open the project folder
-Open new terminal 
+open VS code,
+open the project folder,
+Open new terminal,
 pip install flask
 python app.py
 
