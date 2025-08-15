@@ -1,9 +1,9 @@
 To open/access the website in your system:
 
 
-open VS code
+Open VS code
 
-open the project folder
+Open the project folder
 
 Open new terminal
 
