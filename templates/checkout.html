@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Checkout</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container mb-3">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% if products %}
+  <div class="row">
+    <!-- Left: Form -->
+    <div class="col-md-6">
+      <form method="POST">
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="name" id="name" required>
+            <button type="button" class="btn btn-dark" onclick="startVoiceInput('name')">🎙</button>
+          </div>
+          <small id="nameStatus" class="text-muted"></small>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label for="address" class="form-label">Shipping Address</label>
+          <div class="input-group">
+            <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
+            <button type="button" class="btn btn-dark" onclick="startVoiceInput('address')">🎙</button>
+          </div>
+          <small id="addressStatus" class="text-muted"></small>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <div class="input-group">
+            <input type="tel" class="form-control" name="phone" id="phone" required>
+            <button type="button" class="btn btn-dark" onclick="startVoiceInput('phone')">🎙</button>
+          </div>
+          <small id="phoneStatus" class="text-muted"></small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Place Order</button>
+      </form>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="col-md-6">
+      <h4>Order Summary</h4>
+      <ul class="list-group">
+        {% for product in products %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ product.name }}</strong> (Color: {{ product.color }}, Qty: {{ product.quantity }})
+            </div>
+            <span>{{ product.price }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('show_products') }}">Shop Now</a></p>
+  {% endif %}
+</div>
+
+<!-- Voice Script -->
+<script>
+  function startVoiceInput(fieldId) {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Your browser doesn't support speech recognition. Please use Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    const statusElem = document.getElementById(fieldId + 'Status');
+    statusElem.innerText = '🎤 Listening...';
+
+    recognition.start();
+
+    recognition.onresult = function(event) {
+      const spokenText = event.results[0][0].transcript.trim();
+      document.getElementById(fieldId).value = spokenText;
+      statusElem.innerText = `✅ Heard: "${spokenText}"`;
+    };
+
+    recognition.onerror = function(event) {
+      statusElem.innerText = '⚠️ Voice recognition error. Try again.';
+      console.error("Speech recognition error:", event.error);
+    };
+
+    recognition.onend = function() {
+      statusElem.innerText += ' (Stopped listening)';
+    };
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+products = [
+    {"id": 1, "name": "Nike Sneakers", "price": "$120", "image": "nike.jpg"},
+    {"id": 2, "name": "Puma Runners", "price": "$90", "image": "puma.jpeg"},
+    {"id": 3, "name": "Adidas Boost", "price": "$110", "image": "adidas.jpg"},
+    {"id": 4, "name": "Reebok Classic", "price": "$80", "image": "reebok.jpg"},
+    {"id": 5, "name": "New Balance", "price": "$105", "image": "newbalance.jpg"},
+    {"id": 6, "name": "Vans Old Skool", "price": "$75", "image": "vans.jpg"},
+    {"id": 7, "name": "Converse All Star", "price": "$65", "image": "converse.jpg"},
+    {"id": 8, "name": "Under Armour", "price": "$95", "image": "ua.jpg"},
+    {"id": 9, "name": "Fila Disruptor", "price": "$70", "image": "fila.jpg"},
+    {"id": 10, "name": "Sketchers GoRun", "price": "$85", "image": "sketchers.jpg"},
+    {"id": 11, "name": "Jordan Retro", "price": "$150", "image": "jordan.jpg"},
+    {"id": 12, "name": "ASICS Gel", "price": "$98", "image": "asics.jpg"},
+    {"id": 13, "name": "Crocs Clog", "price": "$40", "image": "crocs.jpg"},
+    {"id": 14, "name": "Timberland Boot", "price": "$130", "image": "timberland.jpg"},
+    {"id": 15, "name": "Gucci Sneakers", "price": "$300", "image": "gucci.jpg"},
+]

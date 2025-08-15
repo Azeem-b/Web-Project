@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Cart</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mb-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% if products %}
+<form method="POST" action="{{ url_for('cart') }}">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Color</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>
+          <div class="input-group">
+            <select name="color_{{ product.id }}" id="color_{{ product.id }}" class="form-select">
+              <option value="Default" {% if product.color == 'Default' %}selected{% endif %}>Default</option>
+              <option value="Red" {% if product.color == 'Red' %}selected{% endif %}>Red</option>
+              <option value="Blue" {% if product.color == 'Blue' %}selected{% endif %}>Blue</option>
+              <option value="Green" {% if product.color == 'Green' %}selected{% endif %}>Green</option>
+            </select>
+            <button type="button" class="btn btn-outline-secondary" onclick="startDictationSelect('color_{{ product.id }}')">🎤</button>
+          </div>
+        </td>
+        <td>
+          <div class="input-group" style="width: 120px;">
+            <input type="number" name="qty_{{ product.id }}" id="qty_{{ product.id }}" min="1" value="{{ product.quantity }}" class="form-control">
+            <button type="button" class="btn btn-outline-secondary" onclick="startDictation('qty_{{ product.id }}')">🎤</button>
+          </div>
+        </td>
+        <td>{{ product.price }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button type="submit" class="btn btn-primary">Update Cart</button>
+  <a href="{{ url_for('checkout') }}" class="btn btn-success ms-2">Continue to Checkout</a>
+</form>
+{% else %}
+<p>Your cart is empty. <a href="{{ url_for('show_products') }}">Shop Now</a></p>
+{% endif %}
+
+<!-- Voice Recognition Script -->
+<script>
+function startDictation(fieldId) {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Speech recognition is not supported in this browser.");
+    return;
+  }
+  
+  let recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    let transcript = event.results[0][0].transcript;
+    document.getElementById(fieldId).value = transcript.replace(/\D/g, ''); // only numbers for qty
+    recognition.stop();
+  };
+
+  recognition.start();
+}
+
+function startDictationSelect(selectId) {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Speech recognition is not supported in this browser.");
+    return;
+  }
+
+  let recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    let transcript = event.results[0][0].transcript.toLowerCase().trim();
+    let selectElement = document.getElementById(selectId);
+    for (let option of selectElement.options) {
+      if (option.text.toLowerCase() === transcript) {
+        option.selected = true;
+        break;
+      }
+    }
+    recognition.stop();
+  };
+
+  recognition.start();
+}
+</script>
+{% endblock %}

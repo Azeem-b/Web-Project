@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-center mb-4">Create an Account</h3>
+        <form method="POST" novalidate>
+          
+          <!-- Full Name Field -->
+          <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <div class="input-group">
+              <input
+                type="text"
+                name="fullname"
+                class="form-control"
+                id="fullname"
+                placeholder="Your full name"
+                required
+              >
+              <button type="button" class="btn btn-outline-secondary" onclick="startDictation('fullname')">🎤</button>
+            </div>
+          </div>
+
+          <!-- Email Field -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <div class="input-group">
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                placeholder="name@example.com"
+                required
+              >
+              <button type="button" class="btn btn-outline-secondary" onclick="startDictation('email')">🎤</button>
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Create Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                id="password"
+                placeholder="Minimum 6 characters"
+                required
+                minlength="6"
+              >
+              <button type="button" class="btn btn-outline-secondary" onclick="startDictation('password')">🎤</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100">Sign Up</button>
+        </form>
+        <p class="text-center mt-3">
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Voice Recognition Script -->
+<script>
+function startDictation(fieldId) {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Sorry, your browser does not support speech recognition.");
+    return;
+  }
+  
+  const recognition = new webkitSpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = "en-US";
+
+  recognition.start();
+
+  recognition.onresult = function(event) {
+    document.getElementById(fieldId).value = event.results[0][0].transcript;
+    recognition.stop();
+  };
+
+  recognition.onerror = function(event) {
+    console.error(event);
+    recognition.stop();
+  };
+}
+</script>
+{% endblock %}

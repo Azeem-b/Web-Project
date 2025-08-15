@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}About Us - VoiceStore{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-gradient">About <span class="text-primary">VoiceStore</span></h1>
+    <p class="lead text-muted">Redefining the future of hands-free, voice-enabled shopping experiences.</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card border-0 shadow-lg rounded-4 p-4 bg-light">
+        <div class="card-body">
+          <p class="fs-5 mb-4">
+            <strong>VoiceStore</strong> was born from a passion for innovation and accessibility. 
+            We specialize in bringing you the latest audio and voice-controlled technology, designed to simplify your lifestyle.
+          </p>
+          <p class="fs-5 mb-4">
+            In an increasingly fast-paced world, we believe technology should be intuitive and seamless. 
+            Our products are curated to enable hands-free operation, giving you the freedom to shop, browse, and manage tasks using just your voice.
+          </p>
+          <p class="fs-5 mb-4">
+            Whether you're a tech enthusiast or someone looking to simplify daily routines, VoiceStore has something tailored just for you.
+          </p>
+
+          <!-- Dummy Contact Details -->
+          <div class="bg-white p-4 rounded shadow-sm mb-4">
+            <h5 class="fw-bold mb-3 text-primary">Contact Details (London, UK)</h5>
+            <p class="mb-2"><strong>Address:</strong> 123 Innovation Street, Tech City, London, UK</p>
+            <p class="mb-2"><strong>Email:</strong> <a href="mailto:contact.voicestore@gmail.com">contact.voicestore@gmail.com</a></p>
+            <p class="mb-0"><strong>Phone:</strong> +44 20 7946 0958</p>
+          </div>
+
+          <div class="text-end">
+            <a href="/contact" class="btn btn-primary btn-lg shadow-sm mt-3">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .text-gradient {
+    background: linear-gradient(90deg, #007bff, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
+
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Brand & Description -->
+      <div class="col-md-4 mb-4">
+        <h4 class="fw-bold">VoiceStore</h4>
+        <p class="text-white-50 small">
+          Experience the future of shopping. Hands-free, voice-powered, and fashion-forward.
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white-50 text-decoration-none">Home</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Shop</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Login</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase">Follow Us</h5>
+        <ul class="list-inline">
+          <li class="list-inline-item me-3">
+            <a href="https://facebook.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="https://instagram.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-instagram"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="https://twitter.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://youtube.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-youtube"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr class="border-secondary my-3">
+
+    <div class="text-center text-white-50 small">
+      &copy; 2025 VoiceStore. All rights reserved.
+    </div>
+  </div>
+</footer>
+{% endblock %}

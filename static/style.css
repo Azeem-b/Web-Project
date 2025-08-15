@@ -1,0 +1,54 @@
+body {
+  background-color: #f8f9fa;
+}
+.card-title {
+  color: #333;
+}
+/* 🎤 Floating Mic Button - Google style */
+#voice-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 rgba(66, 133, 244, 0.4);
+  animation: pulse 2s infinite;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#voice-btn:hover {
+  background-color: #3367d6;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Pulse animation for glowing effect */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(66, 133, 244, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 133, 244, 0);
+  }
+}
+
+.hero-section {
+  background: url('/pxl.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem 2rem;
+  border-radius: 0.3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}

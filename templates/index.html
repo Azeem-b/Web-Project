@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<!-- ✅ Hero Section -->
+<div class="hero-section">
+  <div class="container py-5">
+    <h1 class="display-5 fw-bold">Welcome to VoiceStore 🎧</h1>
+    <p class="fs-4">Shop the latest in branded footwear — now with voice navigation support!</p>
+    <a href="/products" class="btn btn-primary btn-lg">Explore Products</a>
+  </div>
+</div>
+
+
+
+<!-- ✅ Brands / Categories -->
+<div class="container text-center mb-5">
+  <h2 class="mb-4">Top Brands</h2>
+  <div class="row justify-content-center">
+    <div class="col-6 col-md-2 mb-4">
+      <img src="/nike.jpg" class="img-fluid rounded shadow-sm" alt="Nike">
+      <p class="mt-2 fw-semibold">Nike</p>
+    </div>
+    <div class="col-6 col-md-2 mb-4">
+      <img src="/puma.jpeg" class="img-fluid rounded shadow-sm" alt="Puma">
+      <p class="mt-2 fw-semibold">Puma</p>
+    </div>
+    <div class="col-6 col-md-2 mb-4">
+      <img src="/adidas.jpg" class="img-fluid rounded shadow-sm" alt="Adidas">
+      <p class="mt-2 fw-semibold">Adidas</p>
+    </div>
+    <div class="col-6 col-md-2 mb-4">
+      <img src="/reebok.jpg" class="img-fluid rounded shadow-sm" alt="Reebok">
+      <p class="mt-2 fw-semibold">Reebok</p>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ About Section -->
+<div class="container mb-5">
+  <div class="row align-items-center">
+    <!-- Image Section -->
+    <div class="col-md-6 text-center">
+      <img src="store.png" alt="About VoiceStore" 
+           class="img-fluid rounded shadow-sm" 
+           style="max-height: 400px; width: 100%; object-fit: cover;">
+    </div>
+
+    <!-- Text Section -->
+    <div class="col-md-6">
+      <h3 class="mb-3">Why Shop at VoiceStore?</h3>
+      <p>We combine modern design, top brands, and innovative voice technology to give you a hands-free shopping experience. Browse products, navigate pages, and interact — all with your voice!</p>
+      <ul class="list-unstyled">
+        <li>🗣 Voice-controlled navigation</li>
+        <li>🛒 Curated selection of top footwear</li>
+        <li>🔐 Secure login & sign-up</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+  <div class="container">
+    <div class="row">
+
+      <!-- Brand & Description -->
+      <div class="col-md-4 mb-4">
+        <h4 class="fw-bold">VoiceStore</h4>
+        <p class="text-white-50 small">
+          Experience the future of shopping. Hands-free, voice-powered, and fashion-forward.
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white-50 text-decoration-none">Home</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Shop</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Login</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase">Follow Us</h5>
+        <ul class="list-inline">
+          <li class="list-inline-item me-3">
+            <a href="https://facebook.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="https://instagram.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-instagram"></i>
+            </a>
+          </li>
+          <li class="list-inline-item me-3">
+            <a href="https://twitter.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://youtube.com" target="_blank" class="text-white fs-5">
+              <i class="bi bi-youtube"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <hr class="border-secondary my-3">
+
+    <!-- Copyright -->
+    <div class="text-center text-white-50 small">
+      &copy; 2025 VoiceStore. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+
+{% endblock %}

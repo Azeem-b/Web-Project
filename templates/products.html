@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Our Products</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mb-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- Microphone button for voice -->
+<div class="text-center mb-4">
+  <button id="voiceBtn" class="btn btn-dark">
+    🎙️ Speak to Select Product
+  </button>
+  <p id="voiceStatus" class="mt-2 text-muted"></p>
+</div>
+
+<div class="row">
+  {% for product in products %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <img src="/{{ product.image }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text"><strong>{{ product.price }}</strong></p>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-outline-primary">Add to Cart</a>
+          <a href="{{ url_for('checkout') }}" class="btn btn-success">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Voice control script -->
+<script>
+  // Build product dictionary safely using tojson to avoid syntax errors
+  const products = {
+    {% for product in products %}
+      "{{ product.name | lower }}": "{{ url_for('add_to_cart', product_id=product.id) }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+
+  const voiceBtn = document.getElementById('voiceBtn');
+  const voiceStatus = document.getElementById('voiceStatus');
+
+  voiceBtn.addEventListener('click', () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Your browser doesn't support speech recognition. Please use Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+    voiceStatus.innerText = '🎤 Listening... Please say a product name or say "checkout".';
+
+    recognition.onresult = function(event) {
+      let spokenText = event.results[0][0].transcript.toLowerCase().trim();
+      spokenText = spokenText.replace(/[^a-z0-9 ]/gi, ''); // Remove punctuation
+      voiceStatus.innerText = `✅ You said: "${spokenText}"`;
+
+      let found = false;
+
+      // Check for checkout command
+      if (spokenText.includes('checkout')) {
+        found = true;
+        window.location.href = "{{ url_for('checkout') }}";
+        return;
+      }
+
+      // Match against product names
+      for (const name in products) {
+        if (spokenText.includes(name)) {
+          found = true;
+          window.location.href = products[name];
+          break;
+        }
+      }
+
+      if (!found) {
+        voiceStatus.innerText = `❌ Product not recognized. Please try again.`;
+      }
+    };
+
+    recognition.onerror = function(event) {
+      voiceStatus.innerText = '⚠️ Voice recognition error. Please try again.';
+      console.error("Speech recognition error:", event.error);
+    };
+
+    recognition.onend = function() {
+      voiceStatus.innerText += ' (Stopped listening)';
+    };
+  });
+</script>
+{% endblock %}
